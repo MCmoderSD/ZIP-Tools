@@ -1,9 +1,9 @@
 import de.MCmoderSD.tools.GZIP;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.IOException;
 
 public class Objects {
 
