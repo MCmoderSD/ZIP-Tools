@@ -16,38 +16,107 @@ import java.util.zip.GZIPOutputStream;
 @SuppressWarnings("ALL")
 public class GZIP {
 
+    /**
+     * Compresses the given input file and writes the result to the specified output file.
+     *
+     * @param inputFile the file to compress
+     * @param outputFile the file to write the compressed data to
+     * @return the compressed output file
+     * @throws IOException if an I/O error occurs
+     */
     public static File deflate(File inputFile, File outputFile) throws IOException {
         return deflate(inputFile, outputFile, calculateBufferSize(inputFile, outputFile));
     }
 
+    /**
+     * Decompresses the given input file and writes the result to the specified output file.
+     *
+     * @param inputFile the GZIP-compressed input file
+     * @param outputFile the file to write the decompressed data to
+     * @return the decompressed output file
+     * @throws IOException if an I/O error occurs
+     */
     public static File inflate(File inputFile, File outputFile) throws IOException {
         return inflate(inputFile, outputFile, calculateBufferSize(inputFile, outputFile));
     }
 
+    /**
+     * Compresses the given byte array and writes the result to the specified output file.
+     *
+     * @param bytes the input byte array to compress
+     * @param outputFile the file to write the compressed data to
+     * @return the compressed output file
+     * @throws IOException if an I/O error occurs
+     */
     public static File deflate(byte[] bytes, File outputFile) throws IOException {
         return deflate(bytes, outputFile, calculateBufferSize(outputFile));
     }
 
+    /**
+     * Decompresses the given byte array and writes the result to the specified output file.
+     *
+     * @param bytes the GZIP-compressed input data
+     * @param outputFile the file to write the decompressed data to
+     * @return the decompressed output file
+     * @throws IOException if an I/O error occurs
+     */
     public static File inflate(byte[] bytes, File outputFile) throws IOException {
         return inflate(bytes, outputFile, calculateBufferSize(outputFile));
     }
 
+    /**
+     * Compresses the given input file and returns the result as a byte array.
+     *
+     * @param inputFile the file to compress
+     * @return a byte array containing the compressed data
+     * @throws IOException if an I/O error occurs
+     */
     public static byte[] deflate(File inputFile) throws IOException {
         return deflate(inputFile, calculateBufferSize(inputFile));
     }
 
+    /**
+     * Decompresses the given input file and returns the result as a byte array.
+     *
+     * @param inputFile the GZIP-compressed input file
+     * @return a byte array containing the decompressed data
+     * @throws IOException if an I/O error occurs
+     */
     public static byte[] inflate(File inputFile) throws IOException {
         return inflate(inputFile, calculateBufferSize(inputFile));
     }
 
+    /**
+     * Compresses the given byte array and returns the result as a new byte array.
+     *
+     * @param bytes the input data to compress
+     * @return the compressed byte array
+     * @throws IOException if an I/O error occurs
+     */
     public static byte[] deflate(byte[] bytes) throws IOException {
         return deflate(bytes, calculateBufferSize());
     }
 
+    /**
+     * Decompresses the given byte array and returns the result as a new byte array.
+     *
+     * @param bytes the GZIP-compressed input data
+     * @return the decompressed byte array
+     * @throws IOException if an I/O error occurs
+     */
     public static byte[] inflate(byte[] bytes) throws IOException {
         return inflate(bytes, calculateBufferSize());
     }
 
+    /**
+     * Compresses a file into GZIP format with a specific buffer size.
+     *
+     * @param inputFile   the file to compress
+     * @param outputFile  the destination file for the compressed output
+     * @param bufferSize  the size of the buffer to use while reading/writing
+     * @return the compressed output file
+     * @throws IOException if an I/O error occurs during compression
+     */
     public static File deflate(File inputFile, File outputFile, int bufferSize) throws IOException {
 
         // Create Streams
@@ -74,6 +143,15 @@ public class GZIP {
         return outputFile;
     }
 
+    /**
+     * Decompresses a GZIP-compressed file with a specific buffer size.
+     *
+     * @param inputFile   the GZIP-compressed input file
+     * @param outputFile  the destination file for the decompressed output
+     * @param bufferSize  the size of the buffer to use while reading/writing
+     * @return the decompressed output file
+     * @throws IOException if an I/O error occurs during decompression
+     */
     public static File inflate(File inputFile, File outputFile, int bufferSize) throws IOException {
 
         // Create Streams
@@ -97,6 +175,15 @@ public class GZIP {
         return outputFile;
     }
 
+    /**
+     * Compresses a byte array into GZIP format with a specific buffer size and writes to a file.
+     *
+     * @param bytes       the byte array to compress
+     * @param outputFile  the destination file for the compressed output
+     * @param bufferSize  the size of the buffer to use while reading/writing
+     * @return the compressed output file
+     * @throws IOException if an I/O error occurs during compression
+     */
     public static File deflate(byte[] bytes, File outputFile, int bufferSize) throws IOException {
 
         // Create Streams
@@ -123,6 +210,15 @@ public class GZIP {
         return outputFile;
     }
 
+    /**
+     * Decompresses a GZIP-compressed byte array with a specific buffer size and writes to a file.
+     *
+     * @param bytes       the GZIP-compressed byte array
+     * @param outputFile  the destination file for the decompressed output
+     * @param bufferSize  the size of the buffer to use while reading/writing
+     * @return the decompressed output file
+     * @throws IOException if an I/O error occurs during decompression
+     */
     public static File inflate(byte[] bytes, File outputFile, int bufferSize) throws IOException {
 
         // Create Streams
@@ -146,6 +242,14 @@ public class GZIP {
         return outputFile;
     }
 
+    /**
+     * Compresses a file into a GZIP-compressed byte array using a specific buffer size.
+     *
+     * @param inputFile   the file to compress
+     * @param bufferSize  the size of the buffer to use while reading/writing
+     * @return the compressed byte array
+     * @throws IOException if an I/O error occurs during compression
+     */
     public static byte[] deflate(File inputFile, int bufferSize) throws IOException {
 
         // Create Streams
@@ -172,6 +276,14 @@ public class GZIP {
         return byteArrayOutputStream.toByteArray();
     }
 
+    /**
+     * Decompresses a GZIP-compressed file into a byte array using a specific buffer size.
+     *
+     * @param inputFile   the GZIP-compressed input file
+     * @param bufferSize  the size of the buffer to use while reading/writing
+     * @return the decompressed byte array
+     * @throws IOException if an I/O error occurs during decompression
+     */
     public static byte[] inflate(File inputFile, int bufferSize) throws IOException {
 
         // Create Streams
@@ -195,6 +307,14 @@ public class GZIP {
         return byteArrayOutputStream.toByteArray();
     }
 
+    /**
+     * Compresses a byte array into a GZIP-compressed byte array using a specific buffer size.
+     *
+     * @param bytes       the input byte array to compress
+     * @param bufferSize  the size of the buffer to use while reading/writing
+     * @return the compressed byte array
+     * @throws IOException if an I/O error occurs during compression
+     */
     public static byte[] deflate(byte[] bytes, int bufferSize) throws IOException {
 
         // Create Streams
@@ -221,6 +341,14 @@ public class GZIP {
         return byteArrayOutputStream.toByteArray();
     }
 
+    /**
+     * Decompresses a GZIP-compressed byte array into a byte array using a specific buffer size.
+     *
+     * @param bytes       the GZIP-compressed input byte array
+     * @param bufferSize  the size of the buffer to use while reading/writing
+     * @return the decompressed byte array
+     * @throws IOException if an I/O error occurs during decompression
+     */
     public static byte[] inflate(byte[] bytes, int bufferSize) throws IOException {
 
         // Create Streams
@@ -244,14 +372,35 @@ public class GZIP {
         return byteArrayOutputStream.toByteArray();
     }
 
+    /**
+     * Calculates a default buffer size using the file store block size and available processors.
+     *
+     * @return the calculated buffer size
+     * @throws IOException if an I/O error occurs
+     */
     private static int calculateBufferSize() throws IOException {
         return Math.toIntExact(Files.getFileStore(Paths.get("")).getBlockSize() * Runtime.getRuntime().availableProcessors());
     }
 
+    /**
+     * Calculates the buffer size for the given file using file store block size and available processors.
+     *
+     * @param file the file whose store block size is considered
+     * @return the calculated buffer size
+     * @throws IOException if an I/O error occurs
+     */
     private static int calculateBufferSize(File file) throws IOException {
         return Math.toIntExact(Files.getFileStore(file.toPath()).getBlockSize() * Runtime.getRuntime().availableProcessors());
     }
 
+    /**
+     * Calculates the buffer size based on both input and output files.
+     *
+     * @param input the input file
+     * @param output the output file
+     * @return the calculated buffer size
+     * @throws IOException if an I/O error occurs
+     */
     private static int calculateBufferSize(File input, File output) throws IOException {
         var threads = Runtime.getRuntime().availableProcessors();
         var inputSize = Files.getFileStore(input.toPath()).getBlockSize();
