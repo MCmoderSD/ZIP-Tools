@@ -6,7 +6,7 @@
 
     <groupId>de.MCmoderSD</groupId>
     <artifactId>ZIP-Tools</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>ZIP-Tools</name>
     <description>ZIP-Tools is a Java library designed to simplify the process of compressing and decompressing files using GZIP</description>

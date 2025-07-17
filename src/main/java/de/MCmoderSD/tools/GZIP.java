@@ -1,11 +1,6 @@
 package de.MCmoderSD.tools;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -370,6 +365,63 @@ public class GZIP {
 
         // Return the decompressed byte array
         return byteArrayOutputStream.toByteArray();
+    }
+
+    /**
+     * Compresses a serializable object and returns the compressed byte array.
+     *
+     * @param object the object to compress
+     * @return the compressed byte array
+     * @throws IOException if an I/O error occurs during compression
+     */
+    public static byte[] deflateObject(Object object) throws IOException {
+
+        // Create Streams
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(gzipOutputStream);
+
+        // Write the object to the GZIP output stream
+        objectOutputStream.writeObject(object);
+
+        // Finish the GZIP output stream
+        objectOutputStream.flush();
+        gzipOutputStream.finish();
+
+        // Close Streams
+        objectOutputStream.close();
+        gzipOutputStream.close();
+        byteArrayOutputStream.close();
+
+        // Return the compressed byte array
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    /**
+     * Decompresses a byte array into an object.
+     *
+     * @param bytes the GZIP-compressed byte array representing a serialized object
+     * @return the decompressed object
+     * @throws IOException if an I/O error occurs during decompression
+     * @throws ClassNotFoundException if the class of the serialized object cannot be found
+     */
+    public static Object inflateObject(byte[] bytes) throws IOException, ClassNotFoundException {
+
+        // Create Streams
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+        GZIPInputStream gzipInputStream = new GZIPInputStream(byteArrayInputStream);
+        ObjectInputStream objectInputStream = new ObjectInputStream(gzipInputStream);
+
+        // Read the object from the GZIP input stream
+        Object object = objectInputStream.readObject();
+
+        // Close all streams
+        objectInputStream.close();
+        gzipInputStream.close();
+        byteArrayInputStream.close();
+
+        // Return the decompressed object
+        return object;
     }
 
     /**

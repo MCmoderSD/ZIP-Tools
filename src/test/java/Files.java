@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.IOException;
 
 @SuppressWarnings("ALL")
-public class Main {
+public class Files {
 
     // Input files for testing
     private static final File input25 = new File("storage/input/25-Mio.txt");
     private static final File input50 = new File("storage/input/50-Mio.txt");
     private static final File input100 = new File("storage/input/100-Mio.txt");
 
+    // Example usage of GZIP compression and decompression for files
     public static void main(String[] args) throws IOException {
 
         // Output files for compressed data
