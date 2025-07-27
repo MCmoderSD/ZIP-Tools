@@ -1,13 +1,6 @@
 package de.MCmoderSD.tools;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -110,16 +103,15 @@ public class GZIP {
         return inflate(bytes, calculateBufferSize());
     }
 
-    /**
-     * Compresses a file into GZIP format with a specific buffer size.
-     *
-     * @param inputFile   the file to compress
-     * @param outputFile  the destination file for the compressed output
-     * @param bufferSize  the size of the buffer to use while reading/writing
-     * @return the compressed output file
-     * @throws IOException if an I/O error occurs during compression
-     */
     public static File deflate(File inputFile, File outputFile, int bufferSize) throws IOException {
+
+        // Check if the outputFile exists, if not create it
+        if (!outputFile.exists() && !outputFile.createNewFile()) throw new IOException("Failed to create output file: " + outputFile.getAbsolutePath());
+        if (!outputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + outputFile.getAbsolutePath());
+
+        // Check if the inputFile exists
+        if (!inputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + inputFile.getAbsolutePath());
+        if (!inputFile.exists()) throw new FileNotFoundException("File not found: " + inputFile.getAbsolutePath());
 
         // Create Streams
         FileInputStream fileInputStream = new FileInputStream(inputFile);
@@ -145,16 +137,15 @@ public class GZIP {
         return outputFile;
     }
 
-    /**
-     * Decompresses a GZIP-compressed file with a specific buffer size.
-     *
-     * @param inputFile   the GZIP-compressed input file
-     * @param outputFile  the destination file for the decompressed output
-     * @param bufferSize  the size of the buffer to use while reading/writing
-     * @return the decompressed output file
-     * @throws IOException if an I/O error occurs during decompression
-     */
     public static File inflate(File inputFile, File outputFile, int bufferSize) throws IOException {
+
+        // Check if the outputFile exists, if not create it
+        if (!outputFile.exists() && !outputFile.createNewFile()) throw new IOException("Failed to create output file: " + outputFile.getAbsolutePath());
+        if (!outputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + outputFile.getAbsolutePath());
+
+        // Check if the inputFile exists
+        if (!inputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + inputFile.getAbsolutePath());
+        if (!inputFile.exists()) throw new FileNotFoundException("File not found: " + inputFile.getAbsolutePath());
 
         // Create Streams
         FileInputStream fileInputStream = new FileInputStream(inputFile);
@@ -177,16 +168,11 @@ public class GZIP {
         return outputFile;
     }
 
-    /**
-     * Compresses a byte array into GZIP format with a specific buffer size and writes to a file.
-     *
-     * @param bytes       the byte array to compress
-     * @param outputFile  the destination file for the compressed output
-     * @param bufferSize  the size of the buffer to use while reading/writing
-     * @return the compressed output file
-     * @throws IOException if an I/O error occurs during compression
-     */
     public static File deflate(byte[] bytes, File outputFile, int bufferSize) throws IOException {
+
+        // Check if the outputFile exists, if not create it
+        if (!outputFile.exists() && !outputFile.createNewFile()) throw new IOException("Failed to create output file: " + outputFile.getAbsolutePath());
+        if (!outputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + outputFile.getAbsolutePath());
 
         // Create Streams
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
@@ -212,16 +198,11 @@ public class GZIP {
         return outputFile;
     }
 
-    /**
-     * Decompresses a GZIP-compressed byte array with a specific buffer size and writes to a file.
-     *
-     * @param bytes       the GZIP-compressed byte array
-     * @param outputFile  the destination file for the decompressed output
-     * @param bufferSize  the size of the buffer to use while reading/writing
-     * @return the decompressed output file
-     * @throws IOException if an I/O error occurs during decompression
-     */
     public static File inflate(byte[] bytes, File outputFile, int bufferSize) throws IOException {
+
+        // Check if the outputFile exists, if not create it
+        if (!outputFile.exists() && !outputFile.createNewFile()) throw new IOException("Failed to create output file: " + outputFile.getAbsolutePath());
+        if (!outputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + outputFile.getAbsolutePath());
 
         // Create Streams
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
@@ -244,15 +225,11 @@ public class GZIP {
         return outputFile;
     }
 
-    /**
-     * Compresses a file into a GZIP-compressed byte array using a specific buffer size.
-     *
-     * @param inputFile   the file to compress
-     * @param bufferSize  the size of the buffer to use while reading/writing
-     * @return the compressed byte array
-     * @throws IOException if an I/O error occurs during compression
-     */
     public static byte[] deflate(File inputFile, int bufferSize) throws IOException {
+
+        // Check if the inputFile exists
+        if (!inputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + inputFile.getAbsolutePath());
+        if (!inputFile.exists()) throw new FileNotFoundException("File not found: " + inputFile.getAbsolutePath());
 
         // Create Streams
         FileInputStream fileInputStream = new FileInputStream(inputFile);
@@ -278,15 +255,11 @@ public class GZIP {
         return byteArrayOutputStream.toByteArray();
     }
 
-    /**
-     * Decompresses a GZIP-compressed file into a byte array using a specific buffer size.
-     *
-     * @param inputFile   the GZIP-compressed input file
-     * @param bufferSize  the size of the buffer to use while reading/writing
-     * @return the decompressed byte array
-     * @throws IOException if an I/O error occurs during decompression
-     */
     public static byte[] inflate(File inputFile, int bufferSize) throws IOException {
+
+        // Check if the inputFile exists
+        if (!inputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + inputFile.getAbsolutePath());
+        if (!inputFile.exists()) throw new FileNotFoundException("File not found: " + inputFile.getAbsolutePath());
 
         // Create Streams
         FileInputStream fileInputStream = new FileInputStream(inputFile);
@@ -309,14 +282,6 @@ public class GZIP {
         return byteArrayOutputStream.toByteArray();
     }
 
-    /**
-     * Compresses a byte array into a GZIP-compressed byte array using a specific buffer size.
-     *
-     * @param bytes       the input byte array to compress
-     * @param bufferSize  the size of the buffer to use while reading/writing
-     * @return the compressed byte array
-     * @throws IOException if an I/O error occurs during compression
-     */
     public static byte[] deflate(byte[] bytes, int bufferSize) throws IOException {
 
         // Create Streams
@@ -343,14 +308,6 @@ public class GZIP {
         return byteArrayOutputStream.toByteArray();
     }
 
-    /**
-     * Decompresses a GZIP-compressed byte array into a byte array using a specific buffer size.
-     *
-     * @param bytes       the GZIP-compressed input byte array
-     * @param bufferSize  the size of the buffer to use while reading/writing
-     * @return the decompressed byte array
-     * @throws IOException if an I/O error occurs during decompression
-     */
     public static byte[] inflate(byte[] bytes, int bufferSize) throws IOException {
 
         // Create Streams
@@ -374,13 +331,57 @@ public class GZIP {
         return byteArrayOutputStream.toByteArray();
     }
 
-    /**
-     * Compresses a serializable object and returns the compressed byte array.
-     *
-     * @param object the object to compress
-     * @return the compressed byte array
-     * @throws IOException if an I/O error occurs during compression
-     */
+    public static File deflateObject(Object object, File outputFile) throws IOException {
+
+        // Check if the outputFile exists, if not create it
+        if (!outputFile.exists() && !outputFile.createNewFile()) throw new IOException("Failed to create output file: " + outputFile.getAbsolutePath());
+        if (!outputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + outputFile.getAbsolutePath());
+
+        // Create Streams
+        FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
+        GZIPOutputStream gzipOutputStream = new GZIPOutputStream(fileOutputStream);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(gzipOutputStream);
+
+        // Write the object to the GZIP output stream
+        objectOutputStream.writeObject(object);
+
+        // Finish the GZIP output stream
+        objectOutputStream.flush();
+        gzipOutputStream.finish();
+        fileOutputStream.flush();
+
+        // Close Streams
+        objectOutputStream.close();
+        gzipOutputStream.close();
+        fileOutputStream.close();
+
+        // Return the compressed byte array
+        return outputFile;
+    }
+
+    public static Object inflateObject(File inputFile) throws IOException, ClassNotFoundException {
+
+        // Check if the inputFile exists
+        if (!inputFile.isFile()) throw new IllegalArgumentException("Provided path is not a file: " + inputFile.getAbsolutePath());
+        if (!inputFile.exists()) throw new FileNotFoundException("File not found: " + inputFile.getAbsolutePath());
+
+        // Create Streams
+        FileInputStream fileInputStream = new FileInputStream(inputFile);
+        GZIPInputStream gzipInputStream = new GZIPInputStream(fileInputStream);
+        ObjectInputStream objectInputStream = new ObjectInputStream(gzipInputStream);
+
+        // Read the object from the GZIP input stream
+        Object object = objectInputStream.readObject();
+
+        // Close all streams
+        objectInputStream.close();
+        gzipInputStream.close();
+        fileInputStream.close();
+
+        // Return the decompressed object
+        return object;
+    }
+
     public static byte[] deflateObject(Object object) throws IOException {
 
         // Create Streams
@@ -404,14 +405,6 @@ public class GZIP {
         return byteArrayOutputStream.toByteArray();
     }
 
-    /**
-     * Decompresses a byte array into an object.
-     *
-     * @param bytes the GZIP-compressed byte array representing a serialized object
-     * @return the decompressed object
-     * @throws IOException if an I/O error occurs during decompression
-     * @throws ClassNotFoundException if the class of the serialized object cannot be found
-     */
     public static Object inflateObject(byte[] bytes) throws IOException, ClassNotFoundException {
 
         // Create Streams
