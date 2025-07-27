@@ -12,8 +12,8 @@ public interface ObjectCompressor {
     Object inflateObject(File inputFile);
 
     // Object ---> byte[]
-    byte[] deflateObjectToBytes(Object object);
+    byte[] deflateObject(Object object);
 
     // byte[] ---> Object
-    Object inflateObjectFromBytes(byte[] bytes);
+    Object inflateObject(byte[] bytes);
 }
