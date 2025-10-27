@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.IOException;
 
+@SuppressWarnings("ALL")
 public class Objects {
 
     public record Vector(float... coordinates) implements Serializable {

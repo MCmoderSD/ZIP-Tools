@@ -2,7 +2,7 @@ package de.MCmoderSD.tools.interfaces;
 
 import java.io.File;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("ALL")
 public interface FileCompressor {
 
     // File ---> File
