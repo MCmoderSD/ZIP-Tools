@@ -5,7 +5,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.IOException;
 
-
 record Vector(float... coordinates) implements Serializable {
 
     Vector {
