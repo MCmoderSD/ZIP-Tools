@@ -5,6 +5,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.IOException;
 
+import static java.lang.IO.println;
+
 record Vector(float... coordinates) implements Serializable {
 
     Vector {
@@ -12,8 +14,8 @@ record Vector(float... coordinates) implements Serializable {
     }
 
     byte[] serialize() throws IOException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+        var byteArrayOutputStream = new ByteArrayOutputStream();
+        var objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(this);
         objectOutputStream.flush();
         return byteArrayOutputStream.toByteArray();
@@ -24,23 +26,23 @@ record Vector(float... coordinates) implements Serializable {
 void main() throws IOException, ClassNotFoundException {
 
     // Create an n dimensional Vector with random coordinates
-    int n = 8192;
-    float[] coordinates = new float[n];
+    var n = 8192;
+    var coordinates = new float[n];
     for (var i = 0; i < n; i++) coordinates[i] = Math.round(Math.random());
-    Vector vector = new Vector(coordinates);
+    var vector = new Vector(coordinates);
 
     // Serialize the vector
-    byte[] serializedVector = vector.serialize();
-    IO.println("Serialized Vector size: " + serializedVector.length + " bytes");
+    var serializedVector = vector.serialize();
+    println("Serialized Vector size: " + serializedVector.length + " bytes");
 
     // Compress the serialized vector
-    byte[] compressedVector = GZIP.deflateObject(vector);
-    IO.println("Compressed Vector size: " + compressedVector.length + " bytes");
+    var compressedVector = GZIP.deflateObject(vector);
+    println("Compressed Vector size: " + compressedVector.length + " bytes");
 
     // Decompress the vector
-    Vector decompressedVector = (Vector) GZIP.inflateObject(compressedVector);
-    IO.println("Decompressed Vector size: " + decompressedVector.serialize().length + " bytes");
+    var decompressedVector = (Vector) GZIP.inflateObject(compressedVector);
+    println("Decompressed Vector size: " + decompressedVector.serialize().length + " bytes");
 
     // Print Compression Ratio
-    IO.println("Compression Ratio: " + (serializedVector.length / (double) compressedVector.length) + ":1");
+    println("Compression Ratio: " + (serializedVector.length / (double) compressedVector.length) + ":1");
 }

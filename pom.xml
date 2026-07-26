@@ -10,6 +10,21 @@
 
     <name>ZIP-Tools</name>
     <description>ZIP-Tools is a Java library designed to simplify the process of compressing and decompressing files using GZIP</description>
+    <url>https://github.com/MCmoderSD/ZIP-Tools</url>
+
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://github.com/MCmoderSD/ZIP-Tools/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/MCmoderSD/ZIP-Tools</url>
+        <connection>scm:git:https://github.com/MCmoderSD/ZIP-Tools.git</connection>
+        <developerConnection>scm:git:https://github.com/MCmoderSD/ZIP-Tools.git</developerConnection>
+    </scm>
 
     <distributionManagement>
         <repository>
@@ -30,7 +45,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version> <!-- don't change this -->
+                <version>3.4.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
